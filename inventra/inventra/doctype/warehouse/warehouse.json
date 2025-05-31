@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:warehouse_name",
  "creation": "2025-05-31 17:51:54.780198",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -50,23 +51,28 @@
    "fieldname": "parent_warehouse",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
+   "in_list_view": 1,
    "label": "Parent Warehouse",
    "options": "Warehouse"
   },
   {
    "fieldname": "warehouse_name",
    "fieldtype": "Data",
-   "label": "Warehouse Name"
+   "in_list_view": 1,
+   "label": "Warehouse Name",
+   "reqd": 1,
+   "unique": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-05-31 17:53:39.213456",
+ "modified": "2025-06-01 01:56:27.240581",
  "modified_by": "Administrator",
  "module": "Inventra",
  "name": "Warehouse",
+ "naming_rule": "By fieldname",
  "nsm_parent_field": "parent_warehouse",
  "owner": "Administrator",
  "permissions": [

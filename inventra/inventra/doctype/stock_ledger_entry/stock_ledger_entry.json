@@ -1,43 +1,39 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:SLE-{YYYY}-{##}",
  "creation": "2025-05-31 18:00:24.388808",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "item",
-  "warehouse",
   "posting_date",
-  "entry_type",
+  "item",
+  "item_name",
+  "warehouse",
   "column_break_zudh",
   "qty_change",
   "valuation_rate",
-  "stock_value",
-  "reference"
+  "stock_entry_reference"
  ],
  "fields": [
   {
    "fieldname": "item",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Item",
    "options": "Item"
   },
   {
    "fieldname": "warehouse",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Warehouse",
    "options": "Warehouse"
   },
   {
    "fieldname": "posting_date",
-   "fieldtype": "Datetime",
+   "fieldtype": "Date",
    "label": "Posting Date"
-  },
-  {
-   "fieldname": "entry_type",
-   "fieldtype": "Select",
-   "label": "Entry Type",
-   "options": "\nReceipt\nConsume\nTransfer"
   },
   {
    "fieldname": "column_break_zudh",
@@ -46,32 +42,36 @@
   {
    "fieldname": "qty_change",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Qty Change"
   },
   {
    "fieldname": "valuation_rate",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Valuation Rate"
   },
   {
-   "fieldname": "stock_value",
-   "fieldtype": "Currency",
-   "label": "Stock Value"
+   "fieldname": "stock_entry_reference",
+   "fieldtype": "Link",
+   "label": "Stock Entry Reference",
+   "options": "Stock Entry"
   },
   {
-   "fieldname": "reference",
-   "fieldtype": "Link",
-   "label": "Reference",
-   "options": "Stock Entry"
+   "fetch_from": "item.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Read Only",
+   "label": "Item Name"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-31 18:09:43.614073",
+ "modified": "2025-05-31 23:15:46.594264",
  "modified_by": "Administrator",
  "module": "Inventra",
  "name": "Stock Ledger Entry",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
