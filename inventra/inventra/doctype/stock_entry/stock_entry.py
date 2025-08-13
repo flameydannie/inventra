@@ -18,8 +18,8 @@ class StockEntry(Document):
         self.create_stock_ledger_entries()
 
     def on_cancel(self):
-        """Handle deletion of stock ledger entries when canceling."""
-        self.delete_stock_ledger_entries()
+        """Mark stock ledger entries as cancelled when cancelling."""
+        self.mark_stock_ledger_entries_cancelled()
 
     def create_stock_ledger_entries(self):
         """Create stock ledger entries based on entry type."""
@@ -48,15 +48,18 @@ class StockEntry(Document):
             "posting_date": self.posting_date,
             "qty_change": qty,
             "valuation_rate": valuation_rate,
-            "stock_entry_reference": self.name
+            "stock_entry_reference": self.name,
+            "is_cancelled": 0
         }).insert()
 
-    def delete_stock_ledger_entries(self):
-        """Delete all stock ledger entries linked to this stock entry."""
-        frappe.db.delete("Stock Ledger Entry", {
-            "stock_entry_reference": self.name
-        })
-
+    def mark_stock_ledger_entries_cancelled(self):
+        """Mark all stock ledger entries linked to this stock entry as cancelled."""
+        frappe.db.set_value(
+            "Stock Ledger Entry",
+            {"stock_entry_reference": self.name},
+            "is_cancelled",
+            1
+        )
 
 @frappe.whitelist()
 def calculate_valuation_rate(item, warehouse):
