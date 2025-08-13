@@ -7,11 +7,9 @@
  "engine": "InnoDB",
  "field_order": [
   "section_break_istv",
-  "entry_type",
-  "posting_date",
+  "stock_entry_type",
   "column_break_yqvw",
-  "source_warehouse",
-  "target_warehouse",
+  "posting_date",
   "section_break_urse",
   "items",
   "amended_from"
@@ -32,38 +30,10 @@
    "search_index": 1
   },
   {
-   "fieldname": "entry_type",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Entry Type",
-   "options": "\nReceipt\nConsume\nTransfer",
-   "reqd": 1
-  },
-  {
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date",
    "reqd": 1
-  },
-  {
-   "depends_on": "eval: doc.entry_type != 'Receipt'",
-   "fieldname": "source_warehouse",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Source Warehouse",
-   "link_filters": "[[\"Warehouse\",\"is_group\",\"=\",0]]",
-   "mandatory_depends_on": "eval: doc.entry_type != 'Receipt'",
-   "options": "Warehouse"
-  },
-  {
-   "depends_on": "eval: doc.entry_type != 'Consume'",
-   "fieldname": "target_warehouse",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Target Warehouse",
-   "link_filters": "[[\"Warehouse\",\"is_group\",\"=\",0]]",
-   "mandatory_depends_on": "eval: doc.entry_type != 'Consume'",
-   "options": "Warehouse"
   },
   {
    "fieldname": "column_break_yqvw",
@@ -77,14 +47,23 @@
    "fieldname": "items",
    "fieldtype": "Table",
    "label": "Items",
-   "options": "Stock Entry Item"
+   "options": "Stock Entry Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "stock_entry_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Stock Entry Type",
+   "options": "\nReceipt\nConsume\nTransfer",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-06-01 01:47:34.366763",
+ "modified": "2025-08-13 23:57:50.538987",
  "modified_by": "Administrator",
  "module": "Inventra",
  "name": "Stock Entry",

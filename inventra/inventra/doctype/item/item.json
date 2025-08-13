@@ -7,7 +7,8 @@
  "engine": "InnoDB",
  "field_order": [
   "item_name",
-  "unit_of_measure"
+  "unit_of_measure",
+  "description"
  ],
  "fields": [
   {
@@ -22,14 +23,18 @@
    "fieldname": "unit_of_measure",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Unit Of Measure",
-   "reqd": 1
+   "label": "Unit Of Measure"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-01 01:51:13.666540",
+ "modified": "2025-08-13 22:21:56.677855",
  "modified_by": "Administrator",
  "module": "Inventra",
  "name": "Item",

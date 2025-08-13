@@ -6,27 +6,38 @@ from frappe.model.document import Document
 
 class StockEntry(Document):
     def before_save(self):
-        if self.entry_type != "Receipt":
-            for item in self.items:
-                item.valuation_rate = calculate_valuation_rate(item.item, self.source_warehouse)
+        """Set valuation rates for items before saving (except for Receipts)."""
+        if self.stock_entry_type != "Receipt":
+            for row in self.items:
+                item = row.item
+                warehouse = row.source_warehouse
+                row.valuation_rate = calculate_valuation_rate(item, warehouse)
 
     def on_submit(self):
+        """Handle creation of stock ledger entries when submitting."""
         self.create_stock_ledger_entries()
 
     def on_cancel(self):
+        """Handle deletion of stock ledger entries when canceling."""
         self.delete_stock_ledger_entries()
 
     def create_stock_ledger_entries(self):
         """Create stock ledger entries based on entry type."""
-        for item in self.items:
-            if self.entry_type == "Receipt":
-                self.make_sle(item.item, self.target_warehouse, item.qty, item.valuation_rate)
+        for row in self.items:
+            item = row.item
+            valuation_rate = row.valuation_rate
+            qty = row.qty
+            source_warehouse = row.source_warehouse
+            target_warehouse = row.target_warehouse
 
-            elif self.entry_type in ("Consume", "Transfer"):
-                self.make_sle(item.item, self.source_warehouse, -item.qty, item.valuation_rate)
+            if self.stock_entry_type == "Receipt":
+                self.make_sle(item, target_warehouse, qty, valuation_rate)
 
-                if self.entry_type == "Transfer":
-                    self.make_sle(item.item, self.target_warehouse, item.qty, item.valuation_rate)
+            elif self.stock_entry_type in ("Consume", "Transfer"):
+                self.make_sle(item, source_warehouse, -qty, valuation_rate)
+
+                if self.stock_entry_type == "Transfer":
+                    self.make_sle(item, target_warehouse, qty, valuation_rate)
 
     def make_sle(self, item, warehouse, qty, valuation_rate):
         """Create a single stock ledger entry."""
