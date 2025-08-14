@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:SLE-{YYYY}-{##}",
+ "autoname": "format:SLE-{YY}-{MM}-{##}",
  "creation": "2025-05-31 18:00:24.388808",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -22,19 +22,22 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Item",
-   "options": "Item"
+   "options": "Item",
+   "read_only": 1
   },
   {
    "fieldname": "warehouse",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Warehouse",
-   "options": "Warehouse"
+   "options": "Warehouse",
+   "read_only": 1
   },
   {
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "label": "Posting Date"
+   "label": "Posting Date",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_zudh",
@@ -44,37 +47,42 @@
    "fieldname": "qty_change",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Qty Change"
+   "label": "Qty Change",
+   "read_only": 1
   },
   {
    "fieldname": "valuation_rate",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Valuation Rate"
+   "label": "Valuation Rate",
+   "read_only": 1
   },
   {
    "fieldname": "stock_entry_reference",
    "fieldtype": "Link",
    "label": "Stock Entry Reference",
-   "options": "Stock Entry"
+   "options": "Stock Entry",
+   "read_only": 1
   },
   {
    "fetch_from": "item.item_name",
    "fieldname": "item_name",
    "fieldtype": "Read Only",
-   "label": "Item Name"
+   "label": "Item Name",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "is_cancelled",
    "fieldtype": "Check",
-   "label": " Is Cancelled"
+   "label": " Is Cancelled",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-14 00:06:15.060237",
+ "modified": "2025-08-14 23:03:06.361035",
  "modified_by": "Administrator",
  "module": "Inventra",
  "name": "Stock Ledger Entry",

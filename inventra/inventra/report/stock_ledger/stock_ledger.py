@@ -19,7 +19,6 @@ def get_columns() -> list[dict]:
     return [
         {"label": _("Posting Date"), "fieldname": "posting_date", "fieldtype": "Date", "width": 120},
         {"label": _("Item"), "fieldname": "item", "fieldtype": "Link", "options": "Item", "width": 120},
-        {"label": _("Item Name"), "fieldname": "item_name", "fieldtype": "Data", "width": 150},
         {"label": _("Warehouse"), "fieldname": "warehouse", "fieldtype": "Link", "options": "Warehouse", "width": 150},
         {"label": _("Qty In"), "fieldname": "qty_in", "fieldtype": "Float", "width": 80},
         {"label": _("Qty Out"), "fieldname": "qty_out", "fieldtype": "Float", "width": 80},
@@ -56,7 +55,6 @@ def fetch_stock_ledger_entries(conditions: str, filters: dict | None) -> list[di
         SELECT
             posting_date,
             item,
-            item_name,
             warehouse,
             qty_change,
             valuation_rate,
@@ -97,7 +95,6 @@ def process_stock_entries(rows: list[dict]) -> list[dict]:
         data.append({
             "posting_date": row.posting_date,
             "item": row.item,
-            "item_name": row.item_name,
             "warehouse": row.warehouse,
             "qty_in": qty_in,
             "qty_out": qty_out,
